@@ -9,10 +9,6 @@
 import PovioKit
 import UIKit
 
-protocol SightingListTappable: AnyObject {
-    func didTapSightingList()
-}
-
 class FlowerCollectionViewCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let favoriteButton = UIButton()
@@ -20,8 +16,6 @@ class FlowerCollectionViewCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     private let sightingsLabel = PaddingLabel()
-
-    private weak var delegate: SightingListTappable?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,12 +35,11 @@ class FlowerCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Public methods
 extension FlowerCollectionViewCell {
-    func update(with row: FlowersRow, delegate: SightingListTappable) {
+    func update(with row: FlowersRow) {
         titleLabel.text = row.name
         subtitleLabel.text = row.latinName
         sightingsLabel.text = row.sightingsCount
         imageView.setImage(with: row.profilePictureUrl)
-        self.delegate = delegate
     }
 }
 
@@ -114,9 +107,6 @@ private extension FlowerCollectionViewCell {
             sightingsLabel.textAlignment = .center
             sightingsLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             sightingsLabel.layer.masksToBounds = true
-            sightingsLabel.isUserInteractionEnabled = true
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSightingsLabel))
-            sightingsLabel.addGestureRecognizer(tapGestureRecognizer)
         }
 
         contentView.addSubview(stackView)
@@ -132,9 +122,5 @@ private extension FlowerCollectionViewCell {
         setupSightingsLabel()
 
         stackView.setCustomSpacing(15, after: subtitleLabel)
-    }
-
-    @objc private func didTapSightingsLabel() {
-        delegate?.didTapSightingList()
     }
 }

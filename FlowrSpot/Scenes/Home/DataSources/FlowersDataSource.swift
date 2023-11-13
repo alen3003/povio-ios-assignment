@@ -32,12 +32,12 @@ extension FlowersDataSource {
         diffableDataSource?.itemIdentifier(for: indexPath)
     }
 
-    func create(with collectionView: UICollectionView, delegate: SightingListTappable) -> DataSource? {
+    func create(with collectionView: UICollectionView) -> DataSource? {
         diffableDataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, row in
             switch row {
             case let flowersRow as FlowersRow:
                 let cell = collectionView.dequeueReusableCell(FlowerCollectionViewCell.self, at: indexPath)
-                cell.update(with: flowersRow, delegate: delegate)
+                cell.update(with: flowersRow)
                 return cell
             case _:
                 return nil

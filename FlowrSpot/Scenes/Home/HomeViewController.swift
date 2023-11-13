@@ -102,17 +102,11 @@ private extension HomeViewController {
         contentView.rightBarButton.setImage(UIImage(named: "plIconSearch"), for: .normal)
         contentView.rightBarButton.addTarget(self, action: #selector(barButtonPressed), for: .touchUpInside)
         contentView.collectionView.delegate = self
-        contentView.collectionView.dataSource = dataSource.create(with: contentView.collectionView, delegate: self)
+        contentView.collectionView.dataSource = dataSource.create(with: contentView.collectionView)
     }
 
     func loadData() {
         interactor?.fetchFlowers()
-    }
-}
-
-extension HomeViewController: SightingListTappable {
-    func didTapSightingList() {
-        router?.navigateToSightingList()
     }
 }
 

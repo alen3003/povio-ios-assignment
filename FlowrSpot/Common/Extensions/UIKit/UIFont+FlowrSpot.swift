@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIFont {
   static func custom(type: FontStyle, size: CGFloat) -> UIFont {
