@@ -22,4 +22,8 @@ final class SightingListPresenter: ObservableObject {
             .fetchSightings()
             .observe { [weak self] in self?.sightings = $0 }
     }
+
+    func addNewSighting() {
+        // TODO: Implement
+    }
 }

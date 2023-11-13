@@ -12,32 +12,81 @@ struct SightingListItemView: View {
     let sighting: Sighting
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(alignment: .leading, spacing: 20) {
             RemoteImage(url: sighting.picture)
                 .frame(maxWidth: .infinity)
                 .frame(height: 280)
-            UserInfoView()
-            Text("Description")
-            Divider()
-                .background(Color(uiColor: .flowrGray))
+            VStack(spacing: 20) {
+                SightingInfoView(sightingName: sighting.name, userName: sighting.user.fullName)
+                Text(sighting.description)
+                    .font(Font(UIFont.custom(type: .regular, size: 13)))
+                    .foregroundStyle(Color(.flowrDarkGray))
+                Divider()
+                    .frame(height: 1)
+                    .background(Color(.flowrDarkGray))
+                LikesCommentsView(
+                    commentsCount: sighting.commentsCount,
+                    likesCount: sighting.likesCount,
+                    onCommentsTapped: {},
+                    onLikesTapped: {}
+                )
+            }
+            .padding([.leading, .trailing], 27)
         }
+        .padding(.bottom, 20)
     }
 }
 
-struct UserInfoView: View {
+struct SightingInfoView: View {
+    let sightingName: String
+    let userName: String
+
     var body: some View {
         HStack(spacing: 40) {
-            RemoteImage(url: nil, placeholderImage: Image(systemName: "person.circle.fill"))
-            VStack(spacing: 5) {
-                Text("Balcony Flower")
+            RemoteImage(url: nil, placeholderImage: placeholderImage)
+                .frame(width: 40, height: 40)
+            VStack(alignment: .leading, spacing: 5) {
+                Text(sightingName)
                     .font(Font(UIFont.custom(type: .regular, size: 15)))
-                    .foregroundStyle(Color(uiColor: .flowrDarkGray))
-                Text("by Adam Moore")
+                    .foregroundStyle(Color(.flowrGray))
+                Text("by \(userName)")
                     .font(Font(UIFont.custom(type: .italic, size: 12)))
-                    .foregroundStyle(Color(uiColor: .flowrGray))
+                    .foregroundStyle(Color(.flowrDarkGray))
             }
+            Spacer()
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 80)
+    }
+
+    @ViewBuilder
+    private var placeholderImage: some View {
+        Image(systemName: "person.circle.fill")
+            .resizable()
+            .foregroundStyle(Color(.flowrGray))
+    }
+}
+
+struct LikesCommentsView: View {
+    let commentsCount: Int
+    let likesCount: Int
+    let onCommentsTapped: () -> Void
+    let onLikesTapped: () -> Void
+
+    var body: some View {
+        HStack(spacing: 48) {
+            HStack(spacing: 10) {
+                Image(systemName: "ellipsis.message.fill")
+                Text("\(commentsCount) Comments")
+                    .font(Font(UIFont.custom(type: .regular, size: 12)))
+            }
+            .onTapGesture(perform: onCommentsTapped)
+            HStack(spacing: 10) {
+                Image(systemName: "heart.fill")
+                Text("\(commentsCount) Favorites")
+                    .font(Font(UIFont.custom(type: .regular, size: 12)))
+            }
+            .onTapGesture(perform: onLikesTapped)
+            Spacer()
+        }
+        .foregroundStyle(Color(.flowrDarkGray))
     }
 }

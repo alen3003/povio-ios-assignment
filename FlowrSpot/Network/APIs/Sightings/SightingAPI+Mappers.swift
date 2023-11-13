@@ -20,7 +20,9 @@ extension SightingsAPI {
                     latitude: $0.latitude,
                     longitude: $0.longitude,
                     likesCount: $0.likesCount,
-                    commentsCount: $0.commentsCount
+                    commentsCount: $0.commentsCount,
+                    flower: Sighting.Flower(id: $0.flower.id, name: $0.flower.name, latinName: $0.flower.latinName),
+                    user: Sighting.User(id: $0.user.id, fullName: $0.user.fullName)
                 )
             }
         }

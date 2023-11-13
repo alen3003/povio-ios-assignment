@@ -17,4 +17,19 @@ struct Sighting: Identifiable {
     let longitude: Double
     let likesCount: Int
     let commentsCount: Int
+    let flower: Flower
+    let user: User
+}
+
+extension Sighting {
+    struct Flower: Identifiable {
+        let id: Int
+        let name: String
+        let latinName: String
+    }
+
+    struct User: Identifiable {
+        let id: Int
+        let fullName: String
+    }
 }

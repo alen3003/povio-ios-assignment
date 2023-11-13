@@ -22,13 +22,30 @@ struct SightingListView: View {
                         }
                     } header: {
                         SightingListHeaderView(sightingCount: sightings.count)
+                    } footer: {
+                        addNewSightingButton
                     }
                 case .failure(let error):
                     Text(error.localizedDescription)
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.white.ignoresSafeArea())
         .onAppear(perform: presenter.fetchSightings)
+    }
+
+    @ViewBuilder
+    private var addNewSightingButton: some View {
+        Button(
+            action: { presenter.addNewSighting() },
+            label: {
+                Text("+ Add New Sighting")
+                    .font(Font(UIFont.custom(type: .regular, size: 15)))
+            }
+        )
+        .frame(width: 200, height: 48)
+        .background(Color(UIColor.flowrPink))
+        .padding([.top, .bottom], 25)
+        .buttonStyle(.plain)
     }
 }
