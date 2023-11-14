@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct SightingListHeaderView: View {
-    let sightingCount: Int
+    let sightingsCount: Int
 
     var body: some View {
         VStack(spacing: 13) {
-            Text("Sighting List")
+            Text("sighting_list".localized())
                 .font(Font(UIFont.custom(type: .regular, size: 24)))
-            Text("Explore between more than \(sightingCount) sightings")
+            Text("explore_sightings".localized(sightingsCount))
                 .font(Font(UIFont.custom(type: .regular, size: 12)))
         }
         .foregroundStyle(Color(uiColor: .flowrGray))

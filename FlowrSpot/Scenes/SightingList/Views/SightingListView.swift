@@ -17,11 +17,12 @@ struct SightingListView: View {
                 switch presenter.sightings {
                 case .success(let sightings):
                     Section {
-                        ForEach(sightings) {
-                            SightingListItemView(sighting: $0)
+                        ForEach(sightings) { sighting in
+                            SightingListItemView(sighting: sighting)
+                                .onAppear { presenter.didShow(item: sighting) }
                         }
                     } header: {
-                        SightingListHeaderView(sightingCount: sightings.count)
+                        SightingListHeaderView(sightingsCount: presenter.totalResults)
                     } footer: {
                         addNewSightingButton
                     }
@@ -39,7 +40,7 @@ struct SightingListView: View {
         Button(
             action: { presenter.addNewSighting() },
             label: {
-                Text("+ Add New Sighting")
+                Text("add_new_sighting".localized())
                     .font(Font(UIFont.custom(type: .regular, size: 15)))
             }
         )

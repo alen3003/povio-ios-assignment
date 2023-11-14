@@ -80,6 +80,8 @@
 		B4A3CA7E2B0192AC00B63AC2 /* SightingsAPI+Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3CA7D2B0192AC00B63AC2 /* SightingsAPI+Endpoints.swift */; };
 		B4A3CA812B01930A00B63AC2 /* SightingsAPI+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3CA802B01930A00B63AC2 /* SightingsAPI+Models.swift */; };
 		B4A3CA832B01936100B63AC2 /* SightingAPI+Mappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3CA822B01936100B63AC2 /* SightingAPI+Mappers.swift */; };
+		B4B393B82B0407DB00718C05 /* PaginatedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B393B72B0407DB00718C05 /* PaginatedResult.swift */; };
+		B4B393BA2B040AB800718C05 /* MetaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B393B92B040AB800718C05 /* MetaModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +167,8 @@
 		B4A3CA7D2B0192AC00B63AC2 /* SightingsAPI+Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightingsAPI+Endpoints.swift"; sourceTree = "<group>"; };
 		B4A3CA802B01930A00B63AC2 /* SightingsAPI+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightingsAPI+Models.swift"; sourceTree = "<group>"; };
 		B4A3CA822B01936100B63AC2 /* SightingAPI+Mappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightingAPI+Mappers.swift"; sourceTree = "<group>"; };
+		B4B393B72B0407DB00718C05 /* PaginatedResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedResult.swift; sourceTree = "<group>"; };
+		B4B393B92B040AB800718C05 /* MetaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +421,7 @@
 		99373B6D2562EFD9005E0116 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				B4B393BB2B04192100718C05 /* Custom */,
 				B4A3CA7B2B01926600B63AC2 /* Flowers */,
 				B4A3CA7C2B01927100B63AC2 /* Sightings */,
 			);
@@ -427,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				99373B9525631CB0005E0116 /* Flower.swift */,
+				B4B393B72B0407DB00718C05 /* PaginatedResult.swift */,
 				B4A3CA6F2B018B9200B63AC2 /* Sighting.swift */,
 			);
 			path = Models;
@@ -514,6 +520,14 @@
 				B4A3CA792B01923800B63AC2 /* SightingsAPI.swift */,
 			);
 			path = Sightings;
+			sourceTree = "<group>";
+		};
+		B4B393BB2B04192100718C05 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				B4B393B92B040AB800718C05 /* MetaModel.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -731,8 +745,10 @@
 				372B953022B0D36400B304B3 /* JSONDecoder+FlowrSpot.swift in Sources */,
 				B4A3CA652B017C5600B63AC2 /* LazyHostingViewController.swift in Sources */,
 				99492826271021A50060C35F /* LoggerStartupProcess.swift in Sources */,
+				B4B393BA2B040AB800718C05 /* MetaModel.swift in Sources */,
 				99373BCB25631E53005E0116 /* ModelMapper.swift in Sources */,
 				37892D80200F38A600BB8259 /* NavigationController.swift in Sources */,
+				B4B393B82B0407DB00718C05 /* PaginatedResult.swift in Sources */,
 				B4A3CA762B018E1100B63AC2 /* RemoteImage.swift in Sources */,
 				37603CEE2010977F00FB9F78 /* RowType.swift in Sources */,
 				99EF39B922E7202D001230BD /* SearchView.swift in Sources */,

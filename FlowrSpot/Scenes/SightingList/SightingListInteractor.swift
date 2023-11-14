@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SightingListInteractorInterface {
-    func fetchSightings() -> Promise<[Sighting]>
+    func fetchSightings(paginator: PaginatedResult) -> Promise<[Sighting]>
 }
 
 final class SightingListInteractor {
@@ -21,8 +21,19 @@ final class SightingListInteractor {
 }
 
 extension SightingListInteractor: SightingListInteractorInterface {
-    func fetchSightings() -> Promise<[Sighting]> {
+    func fetchSightings(paginator: PaginatedResult) -> Promise<[Sighting]> {
         sightingsAPI
-            .fetchSightingsList()
+            .fetchSightingsList(pageNumber: paginator.currentPage)
+            .handle(with: paginator)
+    }
+}
+
+private extension Promise where Value == SightingsAPI.SightingsResponse {
+    func handle(with paginator: PaginatedResult) -> Promise<[Sighting]> {
+        tap {
+            paginator.setShouldFetchNextPage(totalPages: $0.meta.pagination.totalPages)
+            paginator.increaseCurrentPage()
+        }
+        .compactMap(with: SightingsAPI.SightingsMapper.transform)
     }
 }

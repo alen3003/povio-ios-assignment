@@ -11,17 +11,17 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder {
-  private(set) var flowController: FlowController?
+    private(set) var flowController: FlowController?
 }
 
 extension AppDelegate: UIApplicationDelegate {
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    guard !Constants.Environment.isTesting else { return true } // skip initialization for unit tests
-    
-    StartupProcessService()
-      .execute(process: LoggerStartupProcess())
-      .execute(process: FlowControllerStartupProcess { self.flowController = $0 })
-    
-    return true
-  }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard !Constants.Environment.isTesting else { return true } // skip initialization for unit tests
+
+        StartupProcessService()
+            .execute(process: LoggerStartupProcess())
+            .execute(process: FlowControllerStartupProcess { self.flowController = $0 })
+
+        return true
+    }
 }

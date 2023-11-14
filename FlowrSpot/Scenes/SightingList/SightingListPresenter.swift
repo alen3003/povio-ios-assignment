@@ -9,9 +9,19 @@
 import Foundation
 
 final class SightingListPresenter: ObservableObject {
+    private let interactor: SightingListInteractorInterface
+    private let paginator = PaginatedResult(startingPage: 1, itemsPerPage: 20)
+
     @Published private(set) var sightings: Result<[Sighting], Error> = .success([])
 
-    private let interactor: SightingListInteractorInterface
+    private var values: [Sighting] {
+        if case .success(let values) = sightings { return values }
+        return []
+    }
+
+    var totalResults: Int {
+        (paginator.totalPages - 1) * paginator.itemsPerPage
+    }
 
     init(interactor: SightingListInteractorInterface) {
         self.interactor = interactor
@@ -19,11 +29,24 @@ final class SightingListPresenter: ObservableObject {
 
     func fetchSightings() {
         interactor
-            .fetchSightings()
-            .observe { [weak self] in self?.sightings = $0 }
+            .fetchSightings(paginator: paginator)
+            .observe { [weak self, values] result in
+                switch result {
+                case .success(let sightings):
+                    self?.sightings = .success(values + sightings)
+                case .failure(let error):
+                    self?.sightings = .failure(error)
+                }
+            }
+    }
+
+    func didShow(item: Sighting) {
+        guard item.id == values.last?.id else { return }
+        guard paginator.shouldFetchNextPage else { return }
+        fetchSightings()
     }
 
     func addNewSighting() {
-        // TODO: Implement
+        // TODO: Implement addNewSighting
     }
 }

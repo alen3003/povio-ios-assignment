@@ -6,6 +6,7 @@
 //  Copyright © 2023 Povio Labs. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
 struct SightingListItemView: View {
@@ -13,8 +14,7 @@ struct SightingListItemView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            RemoteImage(url: sighting.picture)
-                .frame(maxWidth: .infinity)
+            SightingImageView(url: sighting.picture, flower: sighting.flower)
                 .frame(height: 280)
             VStack(spacing: 20) {
                 SightingInfoView(sightingName: sighting.name, userName: sighting.user.fullName)
@@ -37,6 +37,24 @@ struct SightingListItemView: View {
     }
 }
 
+struct SightingImageView: View {
+    let url: URL?
+    let flower: Sighting.Flower
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            RemoteImage(url: url)
+            VStack(spacing: 7) {
+                Text(flower.name)
+                    .font(Font(UIFont.custom(type: .regular, size: 20)))
+                Text(flower.latinName)
+                    .font(Font(UIFont.custom(type: .italic, size: 12)))
+            }
+            .padding(.bottom, 30)
+        }
+    }
+}
+
 struct SightingInfoView: View {
     let sightingName: String
     let userName: String
@@ -49,7 +67,7 @@ struct SightingInfoView: View {
                 Text(sightingName)
                     .font(Font(UIFont.custom(type: .regular, size: 15)))
                     .foregroundStyle(Color(.flowrGray))
-                Text("by \(userName)")
+                Text("authored".localized(userName))
                     .font(Font(UIFont.custom(type: .italic, size: 12)))
                     .foregroundStyle(Color(.flowrDarkGray))
             }
@@ -75,13 +93,13 @@ struct LikesCommentsView: View {
         HStack(spacing: 48) {
             HStack(spacing: 10) {
                 Image(systemName: "ellipsis.message.fill")
-                Text("\(commentsCount) Comments")
+                Text("comments_count".localized(commentsCount))
                     .font(Font(UIFont.custom(type: .regular, size: 12)))
             }
             .onTapGesture(perform: onCommentsTapped)
             HStack(spacing: 10) {
                 Image(systemName: "heart.fill")
-                Text("\(commentsCount) Favorites")
+                Text("favorites_count".localized(likesCount))
                     .font(Font(UIFont.custom(type: .regular, size: 12)))
             }
             .onTapGesture(perform: onLikesTapped)

@@ -11,6 +11,7 @@ import Foundation
 extension SightingsAPI {
     struct SightingsResponse: Decodable {
         let sightings: [SightingResponse]
+        let meta: MetaModel
     }
 
     struct SightingResponse: Decodable {
@@ -45,6 +46,7 @@ extension SightingsAPI {
             self.id = try container.decode(Int.self, forKey: SightingsAPI.SightingResponse.CodingKeys.id)
             self.name = try container.decode(String.self, forKey: SightingsAPI.SightingResponse.CodingKeys.name)
             self.description = try container.decode(String.self, forKey: SightingsAPI.SightingResponse.CodingKeys.description)
+            // TODO: Remove decoder once backend fixes false picture urls on their side
             let pictureUrl = try container.decodeIfPresent(String.self, forKey: SightingsAPI.SightingResponse.CodingKeys.picture)
                 .map { $0.hasPrefix("https") ? $0 : "https:\($0)" }
             self.picture = URL(string: pictureUrl)

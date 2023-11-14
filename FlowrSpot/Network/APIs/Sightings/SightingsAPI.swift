@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PovioKitNetworking
 
 class SightingsAPI {
     private let client: AlamofireNetworkClient
@@ -15,11 +16,15 @@ class SightingsAPI {
         self.client = client
     }
 
-    func fetchSightingsList() -> Promise<[Sighting]> {
+    func fetchSightingsList(pageNumber: Int) -> Promise<SightingsResponse> {
         client
-            .request(method: .get, endpoint: Endpoints.list)
+            .request(
+                method: .get,
+                endpoint: Endpoints.list,
+                parameters: ["page": pageNumber],
+                parameterEncoding: URLEncoding.queryString
+            )
             .validate()
             .decode(SightingsResponse.self, decoder: .default)
-            .compactMap(with: SightingsMapper.transform)
     }
 }
