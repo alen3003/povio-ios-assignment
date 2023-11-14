@@ -9,15 +9,11 @@
 import SwiftUI
 import UIKit
 
-class LazyHostingViewController<RootView: View>: UIViewController, HostingNavigationConfigurable {
-    // swiftlint:disable implicitly_unwrapped_optional
-    var rootView: RootView!
-    private let isNavigationBarHidden: Bool
+class LazyHostingViewController<RootView: View>: UIViewController {
+    private var rootView: RootView
 
-    var shouldHideNavigationBar: Bool { isNavigationBarHidden }
-
-    init(isNavigationBarHidden: Bool = false) {
-        self.isNavigationBarHidden = isNavigationBarHidden
+    init(rootView: RootView) {
+        self.rootView = rootView
         super.init(nibName: nil, bundle: nil)
     }
 
