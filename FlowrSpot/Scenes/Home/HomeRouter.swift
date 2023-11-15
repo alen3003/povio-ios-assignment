@@ -10,7 +10,6 @@ import UIKit
 
 protocol HomeRoutingLogic {
     func navigateToFlowerDetails(flower: Flower)
-    func navigateToSightingList()
     func navigateToAlert(title: String, message: String, handler: (() -> Void)?)
 }
 
@@ -25,10 +24,6 @@ class HomeRouter {
 extension HomeRouter: HomeRoutingLogic {
     func navigateToFlowerDetails(flower: Flower) {
         // TODO: - Implement me
-    }
-
-    func navigateToSightingList() {
-        print("Hello")
     }
 
     func navigateToAlert(title: String, message: String, handler: (() -> Void)?) {

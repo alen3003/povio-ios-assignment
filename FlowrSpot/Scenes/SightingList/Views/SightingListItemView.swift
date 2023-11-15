@@ -2,7 +2,7 @@
 //  SightingListItemView.swift
 //  FlowrSpot
 //
-//  Created by Alen Sebalj on 12.11.2023..
+//  Created by Alen Sebalj on 12/11/2023.
 //  Copyright © 2023 Povio Labs. All rights reserved.
 //
 
@@ -20,10 +20,10 @@ struct SightingListItemView: View {
                 SightingInfoView(sightingName: sighting.name, userName: sighting.user.fullName)
                 Text(sighting.description)
                     .font(Font(UIFont.custom(type: .regular, size: 13)))
-                    .foregroundStyle(Color(.flowrDarkGray))
+                    .foregroundStyle(Color(.flowrGray))
                 Divider()
                     .frame(height: 1)
-                    .background(Color(.flowrDarkGray))
+                    .background(Color(.dividerGray))
                 LikesCommentsView(
                     commentsCount: sighting.commentsCount,
                     likesCount: sighting.likesCount,
@@ -43,13 +43,19 @@ struct SightingImageView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            RemoteImage(url: url)
+            Color.clear
+                .overlay {
+                    RemoteImage(url: url)
+                        .aspectRatio(contentMode: .fill)
+                }
+                .clipped()
             VStack(spacing: 7) {
                 Text(flower.name)
                     .font(Font(UIFont.custom(type: .regular, size: 20)))
                 Text(flower.latinName)
                     .font(Font(UIFont.custom(type: .italic, size: 12)))
             }
+            .foregroundStyle(.white)
             .padding(.bottom, 30)
         }
     }
@@ -66,10 +72,10 @@ struct SightingInfoView: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(sightingName)
                     .font(Font(UIFont.custom(type: .regular, size: 15)))
-                    .foregroundStyle(Color(.flowrGray))
+                    .foregroundStyle(Color(.textGray))
                 Text("authored".localized(userName))
                     .font(Font(UIFont.custom(type: .italic, size: 12)))
-                    .foregroundStyle(Color(.flowrDarkGray))
+                    .foregroundStyle(Color(.flowrGray))
             }
             Spacer()
         }
@@ -105,6 +111,6 @@ struct LikesCommentsView: View {
             .onTapGesture(perform: onLikesTapped)
             Spacer()
         }
-        .foregroundStyle(Color(.flowrDarkGray))
+        .foregroundStyle(Color(.flowrGray))
     }
 }

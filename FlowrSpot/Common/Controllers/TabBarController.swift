@@ -38,9 +38,8 @@ private extension TabBarController {
         let sightingListPresenter = SightingListPresenter(interactor: SightingListInteractor(sightingsAPI: .init()))
         let sightingListView = SightingListView(presenter: sightingListPresenter)
         let sightingListViewController = LazyHostingViewController<SightingListView>(rootView: sightingListView)
-        let sightingListNavigationController = NavigationController(rootViewController: sightingListViewController)
 
-        let viewControllers = [homeNavigationController, UIViewController(), sightingListNavigationController, UIViewController()]
+        let viewControllers = [homeNavigationController, UIViewController(), sightingListViewController, UIViewController()]
         setViewControllers(viewControllers, animated: true)
 
         if let items = tabBar.items, items.count == viewControllers.count {

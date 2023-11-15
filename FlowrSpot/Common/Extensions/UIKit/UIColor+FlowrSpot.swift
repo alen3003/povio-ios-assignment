@@ -10,7 +10,9 @@ import PovioKit
 import UIKit
 
 extension UIColor {
-  static let flowrGray = UIColor(red: 148, green: 158, blue: 160)
-  static let flowrDarkGray = UIColor(red: 212, green: 216, blue: 217)
-  static let flowrPink = UIColor(red: 223, green: 145, blue: 134)
+    static let flowrGray = UIColor(red: 148, green: 158, blue: 160)
+    static let flowrDarkGray = UIColor(red: 212, green: 216, blue: 217)
+    static let flowrPink = UIColor(red: 223, green: 145, blue: 134)
+    static let textGray = UIColor(red: 51, green: 65, blue: 68)
+    static let dividerGray = UIColor(red: 232, green: 233, blue: 237)
 }

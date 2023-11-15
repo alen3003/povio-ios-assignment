@@ -2,7 +2,7 @@
 //  SightingsAPI+Endpoints.swift
 //  FlowrSpot
 //
-//  Created by Alen Sebalj on 13.11.2023..
+//  Created by Alen Sebalj on 13/11/2023.
 //  Copyright © 2023 Povio Labs. All rights reserved.
 //
 

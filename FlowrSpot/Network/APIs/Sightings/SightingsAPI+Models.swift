@@ -2,7 +2,7 @@
 //  SightingsAPI+Models.swift
 //  FlowrSpot
 //
-//  Created by Alen Sebalj on 13.11.2023..
+//  Created by Alen Sebalj on 13/11/2023.
 //  Copyright © 2023 Povio Labs. All rights reserved.
 //
 
@@ -46,7 +46,7 @@ extension SightingsAPI {
             self.id = try container.decode(Int.self, forKey: SightingsAPI.SightingResponse.CodingKeys.id)
             self.name = try container.decode(String.self, forKey: SightingsAPI.SightingResponse.CodingKeys.name)
             self.description = try container.decode(String.self, forKey: SightingsAPI.SightingResponse.CodingKeys.description)
-            // TODO: Remove decoder once backend fixes false picture urls on their side
+            // TODO: Remove decoder init once backend fixes false picture urls on their side
             let pictureUrl = try container.decodeIfPresent(String.self, forKey: SightingsAPI.SightingResponse.CodingKeys.picture)
                 .map { $0.hasPrefix("https") ? $0 : "https:\($0)" }
             self.picture = URL(string: pictureUrl)
